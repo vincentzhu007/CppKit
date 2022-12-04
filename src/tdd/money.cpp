@@ -5,11 +5,11 @@
 #include "money.h"
 
 namespace cppkit {
-MoneyPtr Money::NewDollar(int amount) {
-  return MoneyPtr(new Dollar(amount, "USD"));
+MoneyPtr Money::Dollar(int amount) {
+  return MoneyPtr(new Money(amount, "USD"));
 }
 
-MoneyPtr Money::NewFranc(int amount) {
-  return MoneyPtr(new Franc(amount, "CHF"));
+MoneyPtr Money::Franc(int amount) {
+  return MoneyPtr(new Money(amount, "CHF"));
 }
 } // cppkit
