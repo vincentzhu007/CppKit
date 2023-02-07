@@ -5,6 +5,10 @@
 #ifndef CPPKIT_SRC_AI_UTILS_TIMEELAPSE_H_
 #define CPPKIT_SRC_AI_UTILS_TIMEELAPSE_H_
 
+#include <cstdint>
+#include <string>
+#include <chrono>
+
 namespace cppkit {
 namespace ai {
 namespace utils {

@@ -9,8 +9,10 @@
 #include <sstream>
 #include <chrono>
 #include "CL/cl2.hpp"
+#include "ai/utils/TimeElapse.h"
 
 using namespace std;
+using namespace cppkit::ai::utils;
 
 std::string FloatVectorToString(const std::vector<float> &data) {
   stringstream ss;
@@ -23,31 +25,6 @@ std::string FloatVectorToString(const std::vector<float> &data) {
 }
 
 constexpr int ARRAY_SIZE = 1000000;
-
-class TimeElapse {
- public:
-  TimeElapse() {
-    Reset();
-  }
-
-  int64_t Elapsed() const {
-    auto now = std::chrono::high_resolution_clock::now();
-    auto elapsed = now - begin_;
-    begin_ = now;
-    return static_cast<int64_t>(std::chrono::duration_cast<std::chrono::microseconds>(elapsed).count());
-  }
-
-  void Reset() {
-    begin_ = std::chrono::high_resolution_clock::now();
-  }
-
-  std::string ToString() const {
-    return "Time elapsed: " + std::to_string(Elapsed()) + " us";
-  }
-
- private:
-  mutable std::chrono::time_point<std::chrono::high_resolution_clock> begin_;
-};
 
 int main() {
   //  vector<float> a_data = {1.0, 2.0, 3.0, 4.0, 5.0};

@@ -11,6 +11,6 @@ target_compile_definitions(hello_cl PRIVATE CL_TARGET_OPENCL_VERSION=100)
 
 add_executable(add_cl)
 target_sources(add_cl PRIVATE add_cl.cpp)
-target_link_libraries(add_cl PRIVATE OpenCL::OpenCL)
+target_link_libraries(add_cl PRIVATE OpenCL::OpenCL aiutils)
 target_compile_definitions(add_cl PRIVATE CL_TARGET_OPENCL_VERSION=200)
 target_compile_definitions(add_cl PRIVATE CL_HPP_TARGET_OPENCL_VERSION=200)
