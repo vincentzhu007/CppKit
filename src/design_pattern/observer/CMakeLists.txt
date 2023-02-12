@@ -1,0 +1,2 @@
+add_executable(water_heater_v0 water_heater_v0.cpp)
+add_executable(water_heater_v1 water_heater_v1.cpp)
