@@ -1,1 +1,2 @@
 add_executable(multi_thread_fork_bug multi_thread_fork_bug.cpp)
+add_executable(dtor_when_exit dtor_when_exit.cpp)
