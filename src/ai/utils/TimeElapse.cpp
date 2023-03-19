@@ -11,7 +11,7 @@ TimeElapse::TimeElapse() {
   Reset();
 }
 
-int64_t TimeElapse::Elapsed() const {
+int64_t TimeElapse::ElapsedInUs() const {
   auto now = std::chrono::high_resolution_clock::now();
   auto elapsed = now - begin_;
   begin_ = now;
@@ -23,7 +23,7 @@ void TimeElapse::Reset() {
 }
 
 std::string TimeElapse::ToString() const {
-  return "Time elapsed: " + std::to_string(Elapsed()) + " us";
+  return "Time elapsed: " + std::to_string(ElapsedInUs()) + " us";
 }
 } // cppkit
 } // ai

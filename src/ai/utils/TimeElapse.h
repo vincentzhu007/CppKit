@@ -18,7 +18,7 @@ class TimeElapse {
   TimeElapse(const TimeElapse &) = delete;
   TimeElapse &operator=(const TimeElapse &) = delete;
 
-  int64_t Elapsed() const;
+  int64_t ElapsedInUs() const;
   void Reset();
   std::string ToString() const;
 
