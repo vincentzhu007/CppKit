@@ -1,0 +1,1 @@
+add_executable(test_malloc_hook test_malloc_hook.cpp)
