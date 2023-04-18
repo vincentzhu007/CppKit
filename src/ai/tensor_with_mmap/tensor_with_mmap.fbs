@@ -1,0 +1,17 @@
+namespace demo;
+
+table Tensor {
+    shape: [int];
+    buffer: int; // index of Model.buffers
+}
+
+table Buffer {
+    data: [ubyte] (force_align: 16);
+}
+
+table Model {
+    tensors: [Tensor];
+    buffers: [Buffer];
+}
+
+root_type Model;
