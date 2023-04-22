@@ -14,9 +14,9 @@ using namespace std;
 using namespace demo;
 using cppkit::ai::utils::TimeElapse;
 
-class MMapBUffer {
+class MMapBuffer {
  public:
-  MMapBUffer(const std::string &path) : path_(path) {
+  MMapBuffer(const std::string &path) : path_(path) {
     fd_ = open(path.c_str(), O_RDONLY);
     if (fd_ < 0) {
       fprintf(stderr, "open file failed, %s\n", strerror(errno));
@@ -33,7 +33,7 @@ class MMapBUffer {
     is_valid_ = true;
   }
 
-  ~MMapBUffer() {
+  ~MMapBuffer() {
     if (!is_valid_) {
       return;
     }
@@ -153,7 +153,7 @@ int main() {
   {
     TimeElapse te;
     // 加载模型
-    MMapBUffer model("./demo.model");
+    MMapBuffer model("./demo.model");
     model.PrintStat();
     printf("Loaded model elapsed: %ld us\n", te.ElapsedInUs());
 
