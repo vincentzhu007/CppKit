@@ -11,11 +11,18 @@ TimeElapse::TimeElapse() {
   Reset();
 }
 
-int64_t TimeElapse::ElapsedInUs() const {
+int64_t TimeElapse::AsMicroseconds() const {
   auto now = std::chrono::high_resolution_clock::now();
   auto elapsed = now - begin_;
   begin_ = now;
   return static_cast<int64_t>(std::chrono::duration_cast<std::chrono::microseconds>(elapsed).count());
+}
+
+int64_t TimeElapse::AsMilliseconds() const {
+    auto now = std::chrono::high_resolution_clock::now();
+    auto elapsed = now - begin_;
+    begin_ = now;
+    return static_cast<int64_t>(std::chrono::duration_cast<std::chrono::milliseconds>(elapsed).count());
 }
 
 void TimeElapse::Reset() {
@@ -23,7 +30,7 @@ void TimeElapse::Reset() {
 }
 
 std::string TimeElapse::ToString() const {
-  return "Time elapsed: " + std::to_string(ElapsedInUs()) + " us";
+  return "Time elapsed: " + std::to_string(AsMilliseconds()) + " ms";
 }
 } // cppkit
 } // ai

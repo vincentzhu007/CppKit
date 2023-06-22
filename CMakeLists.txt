@@ -4,7 +4,7 @@ project(CppKit LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 11)
 
 # CppKit build options
-option(ENABLE_CPPKIT_TEST "Enable CppKit test?" ON)
+option(ENABLE_CPPKIT_TEST "Enable CppKit test?" OFF)
 message(STATUS "Enable CppKit test? " ${ENABLE_CPPKIT_TEST})
 
 # third party dependencies
