@@ -11,8 +11,10 @@ option(ENABLE_TESTS "Enable tests, which need google test. install it with 'sudo
 add_library(utils_obj OBJECT elapsed_time.cpp)
 target_include_directories(utils_obj INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
 
-add_executable(matmul_naive matmul_naive.cpp)
-target_link_libraries(matmul_naive PRIVATE utils_obj)
+add_library(matmul_obj OBJECT matmul.cpp)
+
+add_executable(matmul_main matmul_main.cpp)
+target_link_libraries(matmul_main PRIVATE matmul_obj utils_obj)
 
 # Test targets
 if(ENABLE_TESTS)
@@ -22,5 +24,9 @@ if(ENABLE_TESTS)
     add_executable(elapsed_time_test elapsed_time_test.cpp)
     target_link_libraries(elapsed_time_test PRIVATE utils_obj)
     target_link_libraries(elapsed_time_test PRIVATE gtest gtest_main)
+
+    add_executable(matmul_test matmul_test.cpp)
+    target_link_libraries(matmul_test PRIVATE matmul_obj)
+    target_link_libraries(matmul_test PRIVATE gtest gtest_main)
 endif()
 
