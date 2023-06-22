@@ -38,8 +38,4 @@ int64_t ElapsedTime::RollingMilliseconds() const {
 void ElapsedTime::Reset() {
   begin_ = std::chrono::high_resolution_clock::now();
 }
-
-std::string ElapsedTime::ToString() const {
-  return "Elapsed " + std::to_string(RollingMilliseconds()) + " ms";
-}
 } // utils

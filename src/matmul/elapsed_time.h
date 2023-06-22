@@ -24,7 +24,6 @@ class ElapsedTime {
   int64_t RollingMicroseconds() const;
   int64_t RollingMilliseconds() const;
   void Reset();
-  std::string ToString() const;
 
  private:
   mutable std::chrono::time_point<std::chrono::high_resolution_clock> begin_;
