@@ -38,7 +38,6 @@ void TestSGEMM(const size_t &K) {
     std::vector<float> C(K * K, 0.0);
     SGEMM(A.data(), B.data(), C.data(), K, K, K);
     std::cout << " OK. " << elapsedTime.ToString() << ".\n" << std::endl;
-
 }
 
 int main() {
