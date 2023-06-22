@@ -1,5 +1,6 @@
 add_subdirectory(cppbase)
 add_subdirectory(design_pattern)
 add_subdirectory(tdd)
-add_subdirectory(ai)
+#add_subdirectory(ai)
 add_subdirectory(malloc_hook)
+add_subdirectory(matmul)

@@ -1,0 +1,1 @@
+add_executable(matmul_naive matmul_naive.cpp)
