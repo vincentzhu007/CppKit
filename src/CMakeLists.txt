@@ -6,3 +6,5 @@ add_subdirectory(tdd)
 add_subdirectory(malloc_hook)
 add_subdirectory(matmul)
 add_subdirectory(gmock_demo)
+
+add_subdirectory(tinyai)

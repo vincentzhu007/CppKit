@@ -2,6 +2,8 @@
 
 include(FetchContent)
 
+set(FLATBUFFERS_BUILD_TESTS OFF)
+
 FetchContent_Declare(
         flatbuffers
         GIT_REPOSITORY https://github.com/google/flatbuffers.git
