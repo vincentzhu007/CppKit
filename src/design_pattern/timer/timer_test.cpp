@@ -3,7 +3,7 @@
 //
 #include <iostream>
 #include "gtest/gtest.h"
-#include "timer/timer.h"
+#include "timer.h"
 
 using namespace std;
 using namespace cppkit;

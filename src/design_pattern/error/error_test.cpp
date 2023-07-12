@@ -4,7 +4,7 @@
 
 #include <iostream>
 #include "gtest/gtest.h"
-#include "error/error.h"
+#include "error.h"
 
 using namespace std;
 using namespace cppkit;

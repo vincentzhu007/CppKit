@@ -18,7 +18,6 @@ target_link_libraries(matmul_main PRIVATE matmul_obj utils_obj)
 
 # Test targets
 if(ENABLE_TESTS)
-#    find_package(GTest REQUIRED)
     include_directories(${GTEST_INCLUDE_DIRS})
 
     add_executable(elapsed_time_test elapsed_time_test.cpp)
