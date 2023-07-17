@@ -94,17 +94,17 @@ TEST_P(DAGTest, IsValid) {
 
 INSTANTIATE_TEST_SUITE_P(TypicalValidGraph, DAGTest,
                          testing::Values<TestParam>(
-                           // Valid DAGs.
-                           TestParam {"1:2", true},
-                           TestParam {  "1:2;2:3;3:4", true },
-                           TestParam {  "0:1,2; 1:3; 2:3;", true },
-                           TestParam {  "0:1;", true },
-                           TestParam {  "0:; 1:2;", true },
-                           TestParam {  "0:1; 1:2,3;", true },
-                           // Invalid DAGs.
-                           TestParam {  "", false },
-                           TestParam {  "0:1;1:0", false },
-                           TestParam {  "0:1; 1:2; 2:0", false }
-                         )
-                         );
+ // Valid DAGs.
+ TestParam {"1:2", true},
+ TestParam {  "1:2;2:3;3:4", true },
+ TestParam {  "0:1,2; 1:3; 2:3;", true },
+ TestParam {  "0:1;", true },
+ TestParam {  "0:; 1:2;", true },
+ TestParam {  "0:1; 1:2,3;", true },
+ // Invalid DAGs.
+ TestParam {  "", false },
+ TestParam {  "0:1;1:0", false },
+ TestParam {  "0:1; 1:2; 2:0", false }
+)
+);
 
