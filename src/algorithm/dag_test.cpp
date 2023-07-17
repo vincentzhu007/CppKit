@@ -2,10 +2,19 @@
 // Created by zgd on 2023/7/15.
 //
 
-#include <gtest/gtest.h>
 #include "dag.h"
+#include <iostream>
+#include <string>
+#include <vector>
+#include <regex>
+#include <gtest/gtest.h>
 
-class DAGTest : public ::testing::Test {
+struct TestParam {
+  std::string graph;
+  bool expect;
+};
+
+ class DAGTest : public ::testing::TestWithParam<TestParam> {
  public:
   static void SetUpTestcases() {
   }
@@ -17,22 +26,85 @@ class DAGTest : public ::testing::Test {
   }
 };
 
-TEST_F(DAGTest, IsValid) {
+namespace {
+/**
+ * Generate the graph map with one string.
+ * Input format:
+ *  "0:1,2; 1:3; 2:3;"
+ *
+ *  1. Node MUST be represent as an integer.
+ *  2. Total linkages of the node is seperated by ';'.
+ *  3. Echo linked node index is seperated by ','.
+ *  4. Any ' ', '\t' and '\n' is ignored.
+ *
+ * @param input String description.
+ *
+ * @return A map describes the node and its linkage.
+ */
+std::map<int, std::vector<int>> GenerateGraphFromString(const std::string &input) {
   std::map<int, std::vector<int>> graph;
-  graph.emplace(0, std::vector<int>({1, 2})); // node 0
-  graph.emplace(1, std::vector<int>({3})); // node 1
-  graph.emplace(2, std::vector<int>({3})); // node 2
 
-  DAG dag(graph);
-  ASSERT_TRUE(dag.IsValid());
+  // Firstly, remove all spaces.
+  std::string s = input;
+  s.erase(std::remove_if(s.begin(), s.end(), ::isspace), s.end());
+
+  // Next, read node linkages.
+  std::stringstream ss(s);
+  std::string t;
+  while (std::getline(ss, t, ';')) {
+    auto n = t.find_first_of(':');
+    if (n == std::string::npos) {
+      continue; // Not found.
+    }
+    int node = std::stoi(t.substr(0, n));
+
+    std::stringstream sub_ss(t.substr(n + 1));
+    std::string v;
+    std::vector<int> linked_nodes;
+    while (std::getline(sub_ss, v, ',')) {
+      linked_nodes.push_back(std::stoi(v));
+    }
+    graph.emplace(node, linked_nodes);
+  }
+
+  return graph;
 }
 
-TEST_F(DAGTest, IsValidFalse) {
-  std::map<int, std::vector<int>> graph;
-  graph.emplace(0, std::vector<int>({1, 2})); // node 0
-  graph.emplace(1, std::vector<int>({3})); // node 1
-  graph.emplace(2, std::vector<int>({0})); // node 2
+void PrintGraph(const std::map<int, std::vector<int>> &graph) {
+  // Print result graph
+  for (const auto &g: graph) {
+    std::cout << "{ " << g.first << " : ";
+    for (auto i: g.second) {
+      std::cout << i << " ";
+    }
+    std::cout << "}, ";
+  }
+  std::cout << std::endl;
+}
+}
+
+TEST_P(DAGTest, IsValid) {
+  auto input = GetParam();
+  auto graph = GenerateGraphFromString(input.graph);
+  PrintGraph(graph);
 
   DAG dag(graph);
-  ASSERT_FALSE(dag.IsValid());
+  ASSERT_EQ(dag.IsValid(), input.expect);
 }
+
+INSTANTIATE_TEST_SUITE_P(TypicalValidGraph, DAGTest,
+                         testing::Values<TestParam>(
+                           // Valid DAGs.
+                           TestParam {"1:2", true},
+                           TestParam {  "1:2;2:3;3:4", true },
+                           TestParam {  "0:1,2; 1:3; 2:3;", true },
+                           TestParam {  "0:1;", true },
+                           TestParam {  "0:; 1:2;", true },
+                           TestParam {  "0:1; 1:2,3;", true },
+                           // Invalid DAGs.
+                           TestParam {  "", false },
+                           TestParam {  "0:1;1:0", false },
+                           TestParam {  "0:1; 1:2; 2:0", false }
+                         )
+                         );
+

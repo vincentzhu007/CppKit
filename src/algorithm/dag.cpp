@@ -25,6 +25,10 @@ bool DAG::IsValid() const {
   std::set<int> all_nodes; // node_id
   std::map<int, int> all_linked_nodes; // node_id: linked_count
 
+  if (graph_.empty()) {
+    return false;
+  }
+
   // 1. Init link info.
   for (const auto &node_links: graph_) {
     int node_id = node_links.first;
