@@ -14,7 +14,7 @@ struct TestParam {
   bool expect;
 };
 
- class DAGTest : public ::testing::TestWithParam<TestParam> {
+class DAGTest : public ::testing::TestWithParam<TestParam> {
  public:
   static void SetUpTestcases() {
   }
@@ -72,6 +72,7 @@ std::map<int, std::vector<int>> GenerateGraphFromString(const std::string &input
 
 void PrintGraph(const std::map<int, std::vector<int>> &graph) {
   // Print result graph
+  std::cout << "{ ";
   for (const auto &g: graph) {
     std::cout << "{ " << g.first << " : ";
     for (auto i: g.second) {
@@ -79,7 +80,7 @@ void PrintGraph(const std::map<int, std::vector<int>> &graph) {
     }
     std::cout << "}, ";
   }
-  std::cout << std::endl;
+  std::cout << "}" << std::endl;
 }
 }
 
@@ -92,19 +93,22 @@ TEST_P(DAGTest, IsValid) {
   ASSERT_EQ(dag.IsValid(), input.expect);
 }
 
-INSTANTIATE_TEST_SUITE_P(TypicalValidGraph, DAGTest,
-                         testing::Values<TestParam>(
- // Valid DAGs.
- TestParam {"1:2", true},
- TestParam {  "1:2;2:3;3:4", true },
- TestParam {  "0:1,2; 1:3; 2:3;", true },
- TestParam {  "0:1;", true },
- TestParam {  "0:; 1:2;", true },
- TestParam {  "0:1; 1:2,3;", true },
- // Invalid DAGs.
- TestParam {  "", false },
- TestParam {  "0:1;1:0", false },
- TestParam {  "0:1; 1:2; 2:0", false }
-)
+INSTANTIATE_TEST_SUITE_P(ValidGraphs, DAGTest,
+  testing::Values<TestParam>(
+    TestParam { "", true },
+    TestParam { "1:2", true},
+    TestParam { "1:2;2:3;3:4", true },
+    TestParam { "0:1,2; 1:3; 2:3;", true },
+    TestParam { "0:1;", true },
+    TestParam { "0:; 1:2;", true },
+    TestParam { "0:1; 1:2,3;", true }
+ )
+);
+
+INSTANTIATE_TEST_SUITE_P(InvalidGraphs, DAGTest,
+  testing::Values<TestParam>(
+    TestParam { "0:1;1:0", false },
+    TestParam { "0:1; 1:2; 2:0", false }
+  )
 );
 

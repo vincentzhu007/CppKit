@@ -19,15 +19,13 @@
  *    从A中将此节点所连接的其它节点的被连接次数减1，如果减到0则删除它。
  * 4、重复3操作，直到B为空或者B中所有节点都在A中。
  *
+ * 说明：空的图是合法的，对应的拓扑排序也为空。
+ *
  * @return true: 是DAG； false: 不是DAG。
  */
 bool DAG::IsValid() const {
   std::set<int> all_nodes; // node_id
   std::map<int, int> all_linked_nodes; // node_id: linked_count
-
-  if (graph_.empty()) {
-    return false;
-  }
 
   // 1. Init link info.
   for (const auto &node_links: graph_) {
