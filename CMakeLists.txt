@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.14)
 
-project(CppKit LANGUAGES CXX CUDA)
+project(CppKit LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 
