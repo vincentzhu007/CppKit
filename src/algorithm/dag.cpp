@@ -4,6 +4,7 @@
 
 #include "dag.h"
 #include <set>
+#include <cassert>
 
 /**
  * 判断是否为DAG。

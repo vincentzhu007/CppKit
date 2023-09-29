@@ -11,7 +11,7 @@
 #include <string>
 
 namespace cppkit {
-namespace linux {
+namespace linux_demo {
 class MmapBuffer {
  public:
   explicit MmapBuffer(const std::string &file);

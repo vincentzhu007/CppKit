@@ -12,8 +12,8 @@
 #include <fcntl.h>
 #include "gtest/gtest.h"
 
-using cppkit::linux::TempFile;
-using cppkit::linux::MmapBuffer;
+using cppkit::linux_demo::TempFile;
+using cppkit::linux_demo::MmapBuffer;
 
 constexpr size_t kBlockSize = 1024 * 1024; // 1MB per block
 constexpr size_t kFileSize_1MB = kBlockSize;

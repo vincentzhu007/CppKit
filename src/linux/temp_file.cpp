@@ -8,10 +8,11 @@
 #include "temp_file.h"
 #include <unistd.h>
 #include <stdlib.h>
+#include <string.h>
 #include <iostream>
 
 namespace cppkit {
-namespace linux {
+namespace linux_demo {
 TempFile::TempFile() : TempFile("./", "temp") {}
 
 TempFile::TempFile(const std::string &name) : TempFile("./", name) {}

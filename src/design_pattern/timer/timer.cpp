@@ -4,6 +4,7 @@
 
 #include "timer.h"
 #include <time.h>
+#include <cstring>
 
 namespace cppkit {
 Timer::Timer(uint64_t delayMs, TimeCallback callback)

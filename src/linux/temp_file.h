@@ -11,7 +11,7 @@
 #include <string>
 
 namespace cppkit {
-namespace linux {
+namespace linux_demo {
 /**
  * Temporary file used by process, will be unlinked by destructor.
  * Note: Invoker should keep instance alive when manipulate temporary file.

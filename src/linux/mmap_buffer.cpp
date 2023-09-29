@@ -9,11 +9,12 @@
 #include <iostream>
 #include <unistd.h>
 #include <fcntl.h>
+#include <string.h>
 #include <sys/stat.h>
 #include <sys/mman.h>
 
 namespace cppkit {
-namespace linux {
+namespace linux_demo {
 MmapBuffer::MmapBuffer(const std::string &file) : file_(file) {
   int fd = open(file.c_str(), O_RDWR);
   if (fd < 0) {

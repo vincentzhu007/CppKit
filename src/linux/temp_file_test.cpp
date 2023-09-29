@@ -7,7 +7,7 @@
 #include <filesystem>
 #include "linux/temp_file.h"
 
-using cppkit::linux::TempFile;
+using cppkit::linux_demo::TempFile;
 
 const std::string kTestDir = "temp_file_test_dir";
 
