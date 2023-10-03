@@ -3,3 +3,4 @@ project(cuda_test CXX CUDA)
 
 add_executable(hello_cuda hello_cuda.cu)
 add_executable(cuda_sum cuda_sum.cu)
+add_executable(cuda_index cuda_index.cu)
