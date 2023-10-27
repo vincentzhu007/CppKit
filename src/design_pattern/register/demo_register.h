@@ -53,6 +53,6 @@ class DemoRegistrar {
 };
 
 #define REG_DEMO(key, creator) \
-  static DemoRegistrar kDemoRegistrar##key##creator(key, creator)
+  static DemoRegistrar kDemoRegistrar_##key##_##creator(key, creator)
 
 #endif //CPPKIT_SRC_DESIGN_PATTERN_REGISTER_DEMO_REGISTER_H_

@@ -34,6 +34,14 @@ TEST_F(DemoRegisterTest, GoodRegister) {
   ASSERT_EQ(std::any_cast<std::string>(creator()), std::any_cast<std::string>(TestCreator()));
 }
 
+TEST_F(DemoRegisterTest, RegisterWithMacro) {
+  std::string kTestKey = "test_key";
+  REG_DEMO(kTestKey, TestCreator);
+  auto creator = DemoRegistry::GetInstance().GetCreator(kTestKey);
+  ASSERT_NE(creator, nullptr);
+  ASSERT_EQ(std::any_cast<std::string>(creator()), std::any_cast<std::string>(TestCreator()));
+}
+
 TEST_F(DemoRegisterTest, BadRegister) {
   static DemoRegistrar registrar("test_key", TestCreator);
   auto creator = DemoRegistry::GetInstance().GetCreator("bad_key");
