@@ -1,0 +1,5 @@
+add_library(demo_register demo_register.cpp)
+
+add_executable(demo_register_test demo_register_test.cpp)
+target_link_libraries(demo_register_test PRIVATE demo_register)
+target_link_libraries(demo_register_test PRIVATE gtest gtest_main gmock)
