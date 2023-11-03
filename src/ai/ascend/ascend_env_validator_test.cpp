@@ -31,7 +31,7 @@ TEST_F(AscendEnvValidatorTest, Hello) {
 
 class MockAscendEnvValidator : public AscendEnvValidator {
  public:
-  MOCK_METHOD0(ReadVersion, std::string());
+  MOCK_METHOD(std::string, ReadVersion, (), (const, override));
 };
 
 TEST_F(AscendEnvValidatorTest, VarifyVersionGood) {

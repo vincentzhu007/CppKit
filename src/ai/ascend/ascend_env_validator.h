@@ -10,8 +10,10 @@
 #include <set>
 #include <fstream>
 #include <cstring>
+#include <cstdlib>
+#include <map>
 
-
+std::set<std::string> kValidVersions = {"7.0"};
 std::string kVersionSubPath = "/latest/compiler/version.info";
 
 class AscendEnvValidator {
@@ -19,13 +21,41 @@ class AscendEnvValidator {
   AscendEnvValidator() {
   }
 
-
   bool Verify() {
     return true;
   }
 
-  bool VerifyVersion() {
-    std::set<std::string> kValidVersions = {"7.0", "6.4" };
+  bool VerifyEnv() const {
+    const std::map<std::string, std::string> env_checklist = {
+        // Check if env 'Path' consists compiler bin path.
+        {"PATH", "/compiler/ccec_compiler/bin"},
+        // Check if env 'PYTHONPATH' consists tbe operator path.
+        {"PYTHONPATH", "opp/built-in/op_impl/ai_core/tbe"},
+        // Check if env 'LD_LIBRARY_PATH' consists tbe fwk lib path.
+        {"LD_LIBRARY_PATH", "/lib64"},
+        {"LD_LIBRARY_PATH", "/add-ons"},
+        {"ASCEND_OPP_PATH", "/op"}
+    };
+    for (auto iter: env_checklist) {
+      auto found = VerifyItemInEnv(iter.first, iter.second);
+      if (!found) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  bool VerifyItemInEnv(const std::string &env_name, const std::string & target_content) const {
+    char *var = getenv(env_name.c_str());
+    if (var == nullptr) {
+      std::cout << "Found no env named " << env_name;
+      return false;
+    }
+    
+    return true;
+  }
+
+  bool VerifyVersion() const {
     auto currentVersion = ReadVersion();
     return kValidVersions.find(currentVersion) != kValidVersions.end();
   }
@@ -53,12 +83,8 @@ class AscendEnvValidator {
     return version_str;
   }
  private:
-  virtual std::string ReadVersion() {
+  virtual std::string ReadVersion() const {
     return ReadVersionFromFile(version_path_);
-  }
-
-  bool VerifyCannInstallDir() {
-    return false;
   }
 
   std::string version_path_; // the file path stores version info.
