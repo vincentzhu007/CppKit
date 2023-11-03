@@ -31,16 +31,16 @@ TEST_F(AscendEnvValidatorTest, Hello) {
 
 class MockAscendEnvValidator : public AscendEnvValidator {
  public:
-  MOCK_METHOD0(ReadVersion, std::string());
+  MOCK_METHOD(std::string, ReadVersion, (), (const, override));
 };
 
-TEST_F(AscendEnvValidatorTest, VarifyVersionGood) {
+TEST_F(AscendEnvValidatorTest, VerifyVersionGood) {
   auto validator = MockAscendEnvValidator();
   EXPECT_CALL(validator, ReadVersion()).Times(1).WillOnce(Return("7.0"));
   ASSERT_TRUE(validator.VerifyVersion());
 }
 
-TEST_F(AscendEnvValidatorTest, VarifyVersionBad) {
+TEST_F(AscendEnvValidatorTest, VerifyVersionBad) {
   auto validator = MockAscendEnvValidator();
   EXPECT_CALL(validator, ReadVersion()).Times(1).WillOnce(Return("7.1"));
   ASSERT_FALSE(validator.VerifyVersion());
