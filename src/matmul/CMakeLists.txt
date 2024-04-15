@@ -29,3 +29,4 @@ if(ENABLE_TESTS)
     target_link_libraries(matmul_test PRIVATE gtest gtest_main)
 endif()
 
+# benchmark on GEMM

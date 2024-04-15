@@ -7,7 +7,10 @@ add_subdirectory(ai)
 add_subdirectory(matmul)
 add_subdirectory(gmock_demo)
 add_subdirectory(algorithm)
-add_subdirectory(tinyai)
+# add_subdirectory(tinyai)
 if(CPPKIT_ENABLE_CUDA)
     add_subdirectory(cuda)
 endif()
+
+
+add_subdirectory(benchmark)
