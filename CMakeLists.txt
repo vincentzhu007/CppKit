@@ -1,7 +1,8 @@
 cmake_minimum_required(VERSION 3.14)
 
-project(CppKit LANGUAGES CXX)
+project(CppKit LANGUAGES C CXX)
 
+set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
 
 # CppKit build options
@@ -25,4 +26,3 @@ add_subdirectory(src)
 
 # tests
 include(CTest)
-

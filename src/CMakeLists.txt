@@ -14,3 +14,4 @@ endif()
 
 
 add_subdirectory(benchmark)
+add_subdirectory(how_to_optimize_gemm)

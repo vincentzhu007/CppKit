@@ -30,3 +30,5 @@ if(ENABLE_TESTS)
 endif()
 
 # benchmark on GEMM
+add_executable(bench_gemm bench_gemm.cpp)
+target_link_libraries(bench_gemm PUBLIC benchmark benchmark_main)
