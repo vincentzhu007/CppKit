@@ -20,7 +20,7 @@ int main() {
   pthread_t thread;
   pthread_create(&thread, NULL, thread_func, NULL);
 
-  int ret = pthread_setname_np(thread, "MyThread123");
+  int ret = pthread_setname_np(thread, "OS_MyThread123");
   if (ret != 0) {
     printf("failed to call pthread_setname_np, error:%s\n", strerror(errno));
     exit(EXIT_FAILURE);
