@@ -8,6 +8,9 @@ extern "C" {
 void gemm_0(int m, int n, int k, float *a, int lda, float *b, int ldb, float *c,
             int ldc);
 
+void gemm_0_ikj(int m, int n, int k, float *a, int lda, float *b, int ldb,
+                float *c, int ldc);
+
 void gemm_1(int m, int n, int k, float *a, int lda, float *b, int ldb, float *c,
             int ldc);
 

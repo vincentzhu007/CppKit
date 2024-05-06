@@ -12,6 +12,7 @@ if(CPPKIT_ENABLE_CUDA)
     add_subdirectory(cuda)
 endif()
 
-
 add_subdirectory(benchmark)
 add_subdirectory(how_to_optimize_gemm)
+add_subdirectory(memory_bandwidth)
+add_subdirectory(android)

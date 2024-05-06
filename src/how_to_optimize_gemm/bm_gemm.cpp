@@ -25,7 +25,29 @@ static void bm_gemm0(bm::State &state) {
   }
 }
 
-BENCHMARK(bm_gemm0)->MinWarmUpTime(10)->RangeMultiplier(2)->Range(16, 1024);
+BENCHMARK(bm_gemm0)->MinWarmUpTime(10)->RangeMultiplier(2)->Range(16, 2048);
+
+/**
+ * bench gemm_0_ikj
+ */
+static void bm_gemm0_ikj(bm::State &state) {
+  int m, n, k;
+  m = n = k = static_cast<int>(state.range(0));
+
+  std::vector<float> a(m * k);
+  std::vector<float> b(k * n);
+  std::vector<float> c(m * n, 0.0);
+  std::generate(a.begin(), a.end(),
+                []() { return std::rand() * 0.1 / RAND_MAX; });
+  std::generate(b.begin(), b.end(),
+                []() { return std::rand() * 0.1 / RAND_MAX; });
+
+  for (auto _ : state) {
+    gemm_0_ikj(m, n, k, a.data(), m, b.data(), k, c.data(), m);
+  }
+}
+
+BENCHMARK(bm_gemm0_ikj)->MinWarmUpTime(10)->RangeMultiplier(2)->Range(16, 2048);
 
 /**
  * bench gemm_1
@@ -47,7 +69,7 @@ static void bm_gemm1(bm::State &state) {
   }
 }
 
-BENCHMARK(bm_gemm1)->MinWarmUpTime(10)->RangeMultiplier(2)->Range(16, 1024);
+BENCHMARK(bm_gemm1)->MinWarmUpTime(10)->RangeMultiplier(2)->Range(16, 2048);
 
 /**
  * bench gemm_2
