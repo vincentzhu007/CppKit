@@ -17,3 +17,5 @@ add_subdirectory(how_to_optimize_gemm)
 add_subdirectory(memory_bandwidth)
 add_subdirectory(android)
 add_subdirectory(atomic)
+
+add_subdirectory(opencl)
